@@ -4,7 +4,8 @@ make_indra_request <- function(endpoint, payload) {
   response <- httr::POST(
     url = paste0("https://discovery.indra.bio/api/", endpoint),
     body = jsonlite::toJSON(payload, auto_unbox = TRUE),
-    httr::content_type_json()
+    httr::content_type_json(),
+    httr::user_agent(paste0("r-indra.gsea/", packageVersion("indra.gsea")))
   )
 
   if (httr::http_error(response)) {
