@@ -1,0 +1,72 @@
+---
+title: "indra.gsea"
+output:
+  md_document:
+    variant: gfm
+---
+
+```{r, include = FALSE}
+if (requireNamespace("printr", quietly = TRUE)) {
+  library(printr)
+  options(printr.digits = 2)  # Set number of significant digits for printr
+}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# indra.gsea
+
+This package provides a simple interface for Gene Set Enrichment Analysis (GSEA)
+using the [INDRA Biomedical Discovery Engine](https://discovery.indra.bio/).
+The Biomedical Discovery Engine is built on INDRA CoGEx, a graph database
+integrating causal relations, ontological relations, properties, and data,
+assembled at scale automatically from the scientific literature and structured
+sources.
+
+## Installing
+
+The pre-release version of the package can be pulled from GitHub using the
+[remotes](https://cran.r-project.org/package=remotes) package:
+
+```{r install, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("clemenshug/indra.gsea")
+```
+
+## Usage
+
+Query genes can be either [HGNC](https://www.genenames.org/) gene symbols or
+IDs. The package contains an example set of gene IDs related to COVID-19
+infection.
+
+```{r usage_example}
+library(indra.gsea)
+
+data("covid_related_genes")
+
+head(covid_related_genes)
+
+res <- indra_discrete_gsea(covid_related_genes)
+```
+
+The result is a list with the following elements:
+
+```{r}
+names(res)
+```
+
+For example, enriched Reactome pathways can be accessed as follows:
+
+```{r, include = FALSE}
+res$reactome$q <- as.character(signif(res$reactome$q, 2))
+res$reactome$p <- as.character(signif(res$reactome$p, 2))
+```
+
+```{r}
+head(res$reactome, n = 10)
+```

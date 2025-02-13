@@ -1,0 +1,29 @@
+Package: indra.gsea
+Type: Package
+Title: Perform Gene Set Enrichment Analysis with the INDRA API
+Description: This package provides a simple interface to the INDRA Biomedical
+  Discovery Engine (https://discovery.indra.bio/) for Gene Set Enrichment
+  Analysis (GSEA). INDRA Biomedical Discovery Engine is built on INDRA CoGEx,
+  a graph database integrating causal relations, ontological relations,
+  properties, and data, assembled at scale automatically from the scientific
+  literature and structured sources.
+Version: 0.1.0
+Date: 2025-02-12
+Authors@R: person("Clemens", "Hug", role=c("aut", "cre"), email="clemens_hug@hms.harvard.edu")
+Author: Clemens Hug [aut, cre]
+Maintainer: Clemens Hug <clemens_hug@hms.harvard.edu>
+URL: https://github.com/clemenshug/indra.gsea
+BugReports: https://github.com/clemenshug/indra.gsea/issues
+License: MIT + file LICENSE
+Depends:
+    R (>= 3.5)
+Imports:
+    httr,
+    jsonlite
+Suggests:
+    printr,
+    testthat
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+LazyData: true
+Encoding: UTF-8
