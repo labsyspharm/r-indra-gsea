@@ -1,6 +1,6 @@
 # indra.gsea
 
-This package provides a simple interface for Gene Set Enrichment
+This package provides a simple R interface for Gene Set Enrichment
 Analysis (GSEA) using the [INDRA Biomedical Discovery
 Engine](https://discovery.indra.bio/). The Biomedical Discovery Engine
 is built on INDRA CoGEx, a graph database integrating causal relations,
@@ -14,7 +14,7 @@ the [remotes](https://cran.r-project.org/package=remotes) package:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("clemenshug/indra.gsea")
+remotes::install_github("labsyspharm/r-indra-gsea")
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ The result is a list with the following elements:
 
 ``` r
 names(res)
-#> [1] "go"               "indra-downstream" "indra-upstream"   "phenotype"       
+#> [1] "go"               "indra-downstream" "indra-upstream"   "phenotype"
 #> [5] "reactome"         "wikipathways"
 ```
 
@@ -67,3 +67,15 @@ Fisher’s exact test and correcting for multiple comparisons using the
 Benjamini-Hochberg (FDR) method with α = 0.05 on genes causally upstream
 by one step from all entities in the INDRA database. Analysis was
 performed using all human genes as the background set.
+
+## Credits
+
+INDRA Biomedical Discovery Engine was developed by the
+[Gyori Lab](https://gyorilab.github.io/) at Northeastern University.
+
+INDRA CoGEx (Context Graph Extension) is an automatically assembled biomedical
+knowledge graph which integrates causal mechanisms from INDRA with non-causal
+contextual relations including properties, ontologies, and data.
+
+INDRA CoGEx is funded by grant HR00112220036 under the DARPA ASKEM / ARPA-H BDF
+programs.
