@@ -60,13 +60,20 @@ The result is a list with the following elements:
 names(res)
 ```
 
-For example, enriched Reactome pathways can be accessed as follows:
+For example, all entities that are predicted to affect the query genes upstream
+are stored in the `indra-upstream` element:
 
 ```{r, include = FALSE}
-res$reactome$q <- as.character(signif(res$reactome$q, 2))
-res$reactome$p <- as.character(signif(res$reactome$p, 2))
+res$`indra-upstream`$q <- as.character(signif(res$`indra-upstream`$q, 2))
+res$`indra-upstream`$p <- as.character(signif(res$`indra-upstream`$p, 2))
 ```
 
 ```{r}
-head(res$reactome, n = 10)
+head(res[["indra-upstream"]], n = 10)
 ```
+
+These results are acquired by running overrepresentation analysis using Fisher's
+exact test and correcting for multiple comparisons using the Benjamini-Hochberg
+(FDR) method with α = 0.05 on genes causally upstream by one step from all
+entities in the INDRA database. Analysis was performed using all human genes as
+the background set.

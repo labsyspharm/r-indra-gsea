@@ -38,24 +38,32 @@ The result is a list with the following elements:
 
 ``` r
 names(res)
-#> [1] "go"           "phenotype"    "reactome"     "wikipathways"
+#> [1] "go"               "indra-downstream" "indra-upstream"   "phenotype"       
+#> [5] "reactome"         "wikipathways"
 ```
 
-For example, enriched Reactome pathways can be accessed as follows:
+For example, all entities that are predicted to affect the query genes
+upstream are stored in the `indra-upstream` element:
 
 ``` r
-head(res$reactome, n = 10)
+head(res[["indra-upstream"]], n = 10)
 ```
 
-| curie | mlp | mlq | name | p | q |
-|:------------|-----:|-----:|:------------------------------------|:-----|:-----|
-| reactome:R-HSA-168256 | 36.37890 | 32.95944 | Immune System | 4.2e-37 | 1.1e-33 |
-| reactome:R-HSA-9679506 | 35.85212 | 32.73369 | SARS-CoV Infections | 1.4e-36 | 1.8e-33 |
-| reactome:R-HSA-9694516 | 32.92940 | 29.98706 | SARS-CoV-2 Infection | 1.2e-33 | 1e-30 |
-| reactome:R-HSA-1643685 | 32.07391 | 29.25651 | Disease | 8.4e-33 | 5.5e-30 |
-| reactome:R-HSA-5663205 | 31.69592 | 28.97543 | Infectious disease | 2e-32 | 1.1e-29 |
-| reactome:R-HSA-9824446 | 30.81957 | 28.17826 | Viral Infection Pathways | 1.5e-31 | 6.6e-29 |
-| reactome:R-HSA-9705683 | 28.21635 | 25.64199 | SARS-CoV-2-host interactions | 6.1e-29 | 2.3e-26 |
-| reactome:R-HSA-9705671 | 25.43664 | 22.92027 | SARS-CoV-2 activates/modulates innate and adaptive immune responses | 3.7e-26 | 1.2e-23 |
-| reactome:R-HSA-1280215 | 25.30356 | 22.83834 | Cytokine Signaling in Immune system | 5e-26 | 1.5e-23 |
-| reactome:R-HSA-168249 | 18.86643 | 16.44697 | Innate Immune System | 1.4e-19 | 3.6e-17 |
+| curie           |      mlp |      mlq | name               | p       | q       |
+|:----------------|---------:|---------:|:-------------------|:--------|:--------|
+| hgnc:5438       | 37.27190 | 32.58177 | IFNG               | 5.3e-38 | 2.6e-33 |
+| mesh:D007239    | 33.69205 | 29.30295 | Infections         | 2e-34   | 5e-30   |
+| fplx:Interferon | 31.71050 | 27.49749 | Interferon         | 1.9e-32 | 3.2e-28 |
+| fplx:IFNA       | 29.18266 | 25.09459 | IFNA               | 6.6e-30 | 8e-26   |
+| hgnc:11892      | 29.05399 | 25.06283 | TNF                | 8.8e-30 | 8.7e-26 |
+| chebi:16412     | 27.98291 | 24.07094 | lipopolysaccharide | 1e-28   | 8.5e-25 |
+| hgnc:5434       | 25.78337 | 21.93834 | IFNB1              | 1.6e-26 | 1.2e-22 |
+| hgnc:6018       | 23.76897 | 19.98193 | IL6                | 1.7e-24 | 1e-20   |
+| fplx:Protease   | 23.22356 | 19.48767 | Protease           | 6e-24   | 3.3e-20 |
+| hgnc:11362      | 19.87229 | 16.18216 | STAT1              | 1.3e-20 | 6.6e-17 |
+
+These results are acquired by running overrepresentation analysis using
+Fisher’s exact test and correcting for multiple comparisons using the
+Benjamini-Hochberg (FDR) method with α = 0.05 on genes causally upstream
+by one step from all entities in the INDRA database. Analysis was
+performed using all human genes as the background set.

@@ -9,9 +9,9 @@ indra_discrete_gsea(
   method = "fdr_bh",
   alpha = 0.05,
   keep_insignificant = FALSE,
-  minimum_evidence_count = 1,
+  minimum_evidence_count = 2,
   minimum_belief = 0,
-  indra_path_analysis = FALSE,
+  indra_path_analysis = TRUE,
   background_genes = NULL
 )
 }
