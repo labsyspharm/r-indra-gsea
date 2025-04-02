@@ -19,6 +19,7 @@ make_indra_request <- function(endpoint, payload) {
   }
 
   result <- httr::content(response, "text", encoding = "UTF-8")
+  result <- gsub("Infinity", '"Inf"', result)
   jsonlite::fromJSON(result)
 }
 
